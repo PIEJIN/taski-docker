@@ -1,4 +1,4 @@
-# docker-compose.yml
+# docker-compose.production.yml
 version: '3'
 
 volumes:
@@ -11,20 +11,20 @@ services:
     image: postgres:13.10
     env_file: .env
     volumes:
-      - pg_data:/var/lib/postgresql/data
+      - pg_data_production:/var/lib/postgresql/data
   backend:
-    build: ./backend
+    image: piejin/taski_backend
     env_file: .env
     volumes:
       - static:/backend_static
   frontend:
-    build: ./frontend  # Качаем с Docker Hub
+    image: piejin/taski_frontend  # Качаем с Docker Hub
     env_file: .env
     command: cp -r /app/build/. /frontend_static/
     volumes:
       - static:/frontend_static
   gateway:
-    build: ./gateway  # Качаем с Docker Hub.
+    image: piejin/taski_gateway  # Качаем с Docker Hub.
     env_file: .env
     ports:
       - 8000:80
