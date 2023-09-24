@@ -13,18 +13,18 @@ services:
     volumes:
       - pg_data:/var/lib/postgresql/data
   backend:
-    image: piejin/taski_backend
+    image: piejin/taski_backend:latest
     env_file: .env
     volumes:
       - static:/backend_static
   frontend:
-    image: piejin/taski_frontend  # Качаем с Docker Hub
+    image: piejin/taski_frontend:latest  # Качаем с Docker Hub
     env_file: .env
     command: cp -r /app/build/. /frontend_static/
     volumes:
       - static:/frontend_static
   gateway:
-    image: piejin/taski_gateway  # Качаем с Docker Hub.
+    image: piejin/taski_gateway:latest  # Качаем с Docker Hub.
     env_file: .env
     ports:
       - 8000:80
